@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<body id="homepage" onload="">
+<html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
 		<title>Home</title>
@@ -9,7 +9,7 @@
 	</head>
 	
 	<body id="homepage" onload="">
-		
+				
 		<nav class="navbar navbar-default" role="navigation">
 			<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
@@ -64,5 +64,4 @@
 		<!-- Include all compiled plugins (below), or include individual files as needed -->
 		<script src="js/bootstrap.min.js"></script>
 	</body>
-	
-</body>
+</html>
