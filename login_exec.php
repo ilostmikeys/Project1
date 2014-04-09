@@ -1,17 +1,17 @@
 <?php
-	//Start session
+	// Start session
 	session_start();
  
-	//Include database connection details
+	// Include database connection details
 	require_once('toDatabase.php');
  
-	//Array to store validation errors
-	$errmsg_arr = array();
+	// Array to store validation errors
+	$errorMessagesArray = array();
  
-	//Validation error flag
-	$errflag = false;
+	// Validation error flag
+	$errorFlag = false;
  
-	//Function to sanitize values received from the form. Prevents SQL injection
+	// Function to sanitize values received from the form. Prevents SQL injection
 	function clean($str) {
 		$str = @trim($str);
 		if(get_magic_quotes_gpc()) {
@@ -20,33 +20,33 @@
 		return mysql_real_escape_string($str);
 	}
  
-	//Sanitize the POST values
+	// Sanitize the POST values 
 	$username = clean($_POST['username']);
 	$password = clean($_POST['password']);
  
-	//Input Validations
+	// Input Validations
 	if($username == '') {
-		$errmsg_arr[] = 'Username missing';
+		$errorMessagesArray[] = 'Username missing';
 		$errflag = true;
 	}
 	if($password == '') {
-		$errmsg_arr[] = 'Password missing';
+		$errorMessagesArray[] = 'Password missing';
 		$errflag = true;
 	}
  
-	//If there are input validations, redirect back to the login form
+	// If there are input validations, redirect back to the login form
 	if($errflag) {
 		$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
 		session_write_close();
-		header("location: index.php");
+		header("location: login.php");
 		exit();
 	}
  
-	//Create query
+	// Create query
 	$qry="SELECT * FROM member WHERE username='$username' AND password='$password'";
 	$result=mysql_query($qry);
  
-	//Check whether the query was successful or not
+	// Check whether the query was successful or not
 	if($result) {
 		if(mysql_num_rows($result) > 0) {
 			//Login Successful
@@ -58,18 +58,18 @@
 			session_write_close();
 			header("location: homepage.php");
 			exit();
-		}else {
-			//Login failed
-			$errmsg_arr[] = 'user name and password not found';
+		} else {
+			// Login failed
+			$errmsg_arr[] = 'Username and password not found';
 			$errflag = true;
 			if($errflag) {
-				$_SESSION['ERRMSG_ARR'] = $errmsg_arr;
+				$_SESSION['ERRMSG_ARR'] = $errorMessagesArray;
 				session_write_close();
-				header("location: index.php");
+				header("location: login_fail.php");
 				exit();
 			}
 		}
-	}else {
+	} else {
 		die("Query failed");
 	}
 

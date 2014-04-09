@@ -31,7 +31,7 @@
 				return false;
 			}
 			if (c==null || c=="") {
-				alert("Gender name must be filled out");
+				alert("Gender must be filled out");
 				return false;
 			}
 			if (d==null || d=="") {
@@ -87,7 +87,7 @@
 				</tr>
 				<tr>
 	  				<td><div align="right">Gender:</div></td>
-	  				<td><input type="text" name="mname" /></td>
+	  				<td><input type="text" name="gender" /></td>
 				</tr>
 				<tr>
 	  				<td><div align="right">Email*:</div></td>
