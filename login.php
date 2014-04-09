@@ -30,7 +30,7 @@
 					?>
 			
 			<div align = "center"> Username: <input name="username" type="text" />
-			<div align = "center"> Password: <input name="password" type="text" />
+			<div align = "center"> Password: <input name="password" type="password" />
 			<p> </p>
 			<div align = "center"> <input name="" type="submit" value="Login" class="btn btn-primary btn" /> </div>
 		</form>
