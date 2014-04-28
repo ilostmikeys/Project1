@@ -63,7 +63,7 @@
 			$errmsg_arr[] = 'Username and password not found';
 			$errflag = true;
 			if($errflag) {
-				$_SESSION['ERRMSG_ARR'] = $errorMessagesArray;
+				$_SESSION['ERRMSG_ARR'] = $errorMessagesArray; 
 				session_write_close();
 				header("location: login_fail.php");
 				exit();
@@ -72,4 +72,6 @@
 	} else {
 		die("Query failed");
 	}
+?>
+
 
