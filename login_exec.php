@@ -56,7 +56,7 @@
 			$_SESSION['SESS_FIRST_NAME'] = $member['username'];
 			$_SESSION['SESS_LAST_NAME'] = $member['password'];
 			session_write_close();
-			header("location: homepage.php");
+			header("location: homepage.html");
 			exit();
 		} else {
 			// Login failed
@@ -65,7 +65,7 @@
 			if($errflag) {
 				$_SESSION['ERRMSG_ARR'] = $errorMessagesArray; 
 				session_write_close();
-				header("location: login_fail.php");
+				header("location: login_fail.html");
 				exit();
 			}
 		}
