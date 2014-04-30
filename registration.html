@@ -9,43 +9,48 @@
 		
 		<script type="text/javascript">
 		function validateForm() {
-			var a=document.forms["reg"]["fname"].value;
-			var b=document.forms["reg"]["lname"].value;
-			var c=document.forms["reg"]["gender"].value;
-			var d=document.forms["reg"]["address"].value;
-			var e=document.forms["reg"]["username"].value;
-			var f=document.forms["reg"]["password"].value;
+			var a = document.forms["reg"]["fname"].value;
+			var b = document.forms["reg"]["lname"].value;
+			var c = document.forms["reg"]["gender"].value;
+			var d = document.forms["reg"]["address"].value;
+			var e = document.forms["reg"]["username"].value;
+			var f = document.forms["reg"]["password"].value;
+			var f2 = document.forms["reg"]["password2"].value;
 			
-			if ((a==null || a=="") && (b==null || b=="") && (c==null || c=="") 
-				&& (d==null || d=="") && (e==null || e=="") && 
-				(f==null || f=="")) {
+			if ((a == null || a == "") && (b == null || b == "") && (c == null || c == "") 
+				&& (d == null || d == "") && (e == null || e == "") && 
+				(f == null || f == "") && (f2 == null || f2 == ""))  {
 					alert("All Field must be filled out");
 					return false;
 			}
-			if (a==null || a=="") {
+			if (a == null || a == "") {
 				alert("First name must be filled out");
 				return false;
 			}
-			if (b==null || b=="") {
+			if (b == null || b == "") {
 				alert("Last name must be filled out");
 				return false;
 			}
-			if (c==null || c=="") {
+			if (c == null || c == "") {
 				alert("Gender must be filled out");
 				return false;
 			}
-			if (d==null || d=="") {
+			if (d == null || d == "") {
 				alert("address must be filled out");
 				return false;
 			}
-			if (e==null || e=="") {
+			if (e == null || e == "") {
 				alert("username must be filled out");
 				return false;
 			}
-   	 		if (f==null || f=="") {
+   	 		if (f == null || f == "") {
 				alert("password must be filled out");
 				return false;
    	   		}
+			if (!f2 == f) { 
+				alert("password2 must be filled out");
+				return false;
+			}
 		}
 		</script>
 		
@@ -102,10 +107,12 @@
 	   				<td><input type="password" name="password" /></td>
 	 			</tr>
 				<tr>
+	   				<td><div align="right"> Confirm Password:</div></td>
+	   				<td><input type="password" name="password2" /></td>
+	 			</tr>
+				<tr>
 					<td width="500"><div align="right"> </div></td>
 					<td width="500"><div align="right">* Must use zmail for confirmation</div></td>
-
-																
 				</tr>
 	 			<tr>
 	   				<td><div align="right"></div></td>
