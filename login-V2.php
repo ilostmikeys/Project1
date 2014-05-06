@@ -27,7 +27,7 @@
 					header("Location: homepage.html");
 					exit;
 				} else {
-  					echo 'false';
+  					header("Location: login_fail.html");
 				}
 			}
 		?>
