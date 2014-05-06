@@ -24,7 +24,7 @@
 				
 				if ($num_row ==1) {
 					$_SESSION['user_name']=$row['username'];
-					header("Location: member.php");
+					header("Location: homepage.html");
 					exit;
 				} else {
   					echo 'false';
