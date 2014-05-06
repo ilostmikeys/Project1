@@ -15,89 +15,93 @@
 	}
 	
 	// Sanitize the POST values
-	$fname = clean($_POST['fname']);
-	$lname = clean($_POST['lname']);
-	$gender = clean($_POST['gender']);
-	$eaddress = clean($_POST['eaddress']);
+	$fullname = clean($_POST['fullname']);
+	$eaddress = clean($_POST['email']);
 	$username = clean($_POST['username']);
-	$password = md5($password);
 	$password = clean($_POST['password']);
-	$password2 = md5($password2);
-	$password2 = clean($_pOST['password2'])
 	
 	// Input Validations
-	if($fname == '') {
-		$errmsg_arr[] = 'First name missing';
-		$errflag = true;
-	}
-	if($lname == '') {
-		$errmsg_arr[] = 'Last name missing';
-		$errflag = true;
-	}
-	if($gender == '') {
-		$errmsg_arr[] = 'Gender missing';
-		$errflag = true;
-	}
-	if($eaddress == '') {
-		$errmsg_arr[] = 'Email Address missing';
-		$errflag = true;
-	}
-	if($username == '') {
-		$errmsg_arr[] = 'username missing';
-		$errflag = true;
-	}
-	if($password == '') {
-		$errmsg_arr[] = 'Password missing';
-		$errflag = true;
-	} 
-	if($password == '') {
-		$errmsg_arr[] = 'Password missing';
-		$errflag = true;
+	if($fullname == '') {
+		// checks if the full name is blank
+		$_SESSION['error']['fullname'] = "Full name is required.";
 	}
 	
-	// create query
-	$success = mysql_query("INSERT INTO member(fname, lname, gender, eaddress, username, password)VALUES('$fname', '$lname', '$gender', '$eaddress', '$username', '$password')");
-	header("location: registration.php?remarks=success");
-	
-	if ($sucess) { 
-		//get the new user id
-		$userid = mysql_insert_id();
-	             
-		//create a random key
-		$key = $username . $email . date('mY');
-		$key = md5($key);
-	             
-		//add confirm row
-		$confirm = mysql_query("INSERT INTO `confirm` VALUES(NULL,'$userid','$key','$email')"); 
-		echo "asd";
-		// if confirm was successful above..
-		if($confirm){
-		
-			//include the swift class
-			include_once 'swift/swift_required.php';
-		
-			//put info into an array to send to the function
-			$info = array(
-				'username' => $username,
-				'email' => $email,
-				'key' => $key);
-				
-			//send the email
-			if(send_email($info)){	
-				//email sent
-				$action['result'] = 'success';
-				array_push($text,'Thanks for signing up. Please check your email for confirmation!');
-			} else {
-				$action['result'] = 'error';
-				array_push($text,'Could not send confirm email');
+	if($_POST['email'] == '') {
+		// checks if the email is blank
+		$_SESSION['error']['email'] = "E-mail is required.";
+	} else {
+		//whether the email format is correct
+		if(preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9._-]+)+$/", $eaddress)) {
+			
+			//if it has the correct format whether the email has already exist
+			$sqlEmailCheck = "SELECT * FROM user WHERE email = '$eaddress'";
+			$resultEmailCheck = mysqli_query($mysqli,$sqlEmailCheck) or die(mysqli_error());
+			if (mysqli_num_rows($resultEmailCheck) > 0) {
+				$_SESSION['error']['email'] = "This Email is already used.";
 			}
-		} else{
-			$action['result'] = 'error';
-			array_push($text,'Confirm row was not added to the database. Reason: ' . mysql_error());
+		} else {
+			//this error will set if the email format is not correct
+			$_SESSION['error']['email'] = "Your email is not valid.";
 		}
 	}
+		
+	if($username == '') {
+		// checks if the username is blank
+		$_SESSION['error']['username'] = "User name is required.";
+	}
+	
+	if($password == '') {
+		// checks if the password is blank
+		$_SESSION['error']['password'] = "Password is required.";
+	} 
+	
+	if(isset($_SESSION['error'])) {
+		header("Location: registration-V2.php");
+		exit;
+	} else {
+		$com_code = md5(uniqid(rand()));
 
-	mysql_close($con);
+		$sqlInsert = "INSERT INTO user (fullname, username, email, password, com_code) VALUES ('$fullname', '$username', '$eaddress', '$password', '$com_code')";
+		$resultInsert = mysqli_query($mysqli,$sqlInsert) or die("Shit happened.");
+		
+		
+		if($resultInsert) {
+			require_once "Mail.php";
+			
+			$from = "<from.gmail.com>";
+			$to = "<$eaddress>";
+			$subject = "Confirmation from GoShare to $username";
+			$body = "Please click the link below to verify and activate your account.";
+			$body .= "localhost/Project1/iregistrationConfirm.php?passkey=$com_code";
+			
+			$host = "GoShareUNSW@gmail.com";
+			$username = "GoShareUNSW@gmail.com";
+			$password = "g0shar3unsw";
+		
+			$headers = array ('From' => $from,
+				'To' => $to,
+				'Subject' => $subject
+			);
+			
+			$smtp = Mail::factory('smtp',
+				array ('host' => 'ssl://smtp.gmail.com',
+				'port' => 465,
+				'auth' => true,
+				'username' => $username,
+				'password' => $password)
+			);
+		
+			$mail = $smtp->send($to, $headers, $body);
+	
+	
+			if (PEAR::isError($mail)) {
+				echo("<p>" . $mail->getMessage() . "</p>");
+			} else {
+				echo("<p>Message successfully sent!</p>");
+			}
+		}
+	}
+	
 ?>
 
 
