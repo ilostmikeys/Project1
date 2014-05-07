@@ -1,5 +1,5 @@
 <?php
-$to = "negina_kohistani@yahoo.com"
+$to = "negina.kohistani@gmail.com"
 $subject = "Results from form"
 $headers = "From: Form Mailer"
 $forward = 0
