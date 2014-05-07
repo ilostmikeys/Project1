@@ -1,0 +1,65 @@
+<html>
+<head>
+	
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<title> User Profile Page </title>
+	
+	<!-- bootstrap css file -->
+	<link href="style/bootstrap-3.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+	<body>
+		<div class="page-header" align="center">
+		  <h1> User Profile Page  </h1>
+		</div>
+
+<?php
+require_once('connection.php');
+$id=$_SESSION['SESS_MEMBER_ID'];
+$result3 = mysql_query("SELECT * FROM member where mem_id='$id'");
+while($row3 = mysql_fetch_array($result3))
+{ 
+	
+$username=$row3['username'];
+$firstname=$row3['fname'];
+$lastname=$row3['lname'];
+$gender=$row3['gender'];
+$email=$row3['address'];
+$picture=$row3['picture'];
+
+}
+?>
+<table width="900" height="200" border="1" align="center">
+	<tr>
+		<td>
+			SOMETHING GOES HERE DONT KNOW YET!!?
+		</td>
+	</tr>
+</table>
+<table width="398" border="1" align="center" cellpadding="0">
+  <tr>
+    <td height="26" colspan="2">Your Profile Information </td>
+	<td><div align="right"><a href="welcome.html">logout</a></div></td>
+  </tr>
+  
+  <tr>
+    <td width="129" rowspan="5"><img src="<?php echo $picture ?>" width="129" height="129" alt="no image found"/></td>
+    <td width="82" valign="top"><div align="left">FirstName:</div></td>
+    <td width="165" valign="top"><?php echo $firstname ?></td>
+  </tr>
+  <tr>
+    <td valign="top"><div align="left">LastName:</div></td>
+    <td valign="top"><?php echo $lastname ?></td>
+  </tr>
+  <tr>
+    <td valign="top"><div align="left">Gender:</div></td>
+    <td valign="top"><?php echo $gender ?></td>
+  </tr>
+ 
+  <tr>
+    <td valign="top"><div align="left">Email: </div></td>
+    <td valign="top"><?php echo $email ?></td>
+  </tr>
+</table>
+<p align="center"><a href="index.php"></a></p>
+</body>
+</html>
