@@ -5,7 +5,7 @@
 	$result = mysqli_query($mysqli,$sql) or die(mysqli_error());
 	
 	if($result) {
-		echo '<div>Your account is now active. You may now <a href="login.html">Log in</a></div>';
+		echo '<div>Your account is now active. You may now <a href="login-v2.php">Log in</a></div>';
 	} else {
 		echo "An error has occurred.";
 	}

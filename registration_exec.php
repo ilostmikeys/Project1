@@ -72,7 +72,7 @@
 			$to = "<$eaddress>";
 			$subject = "Confirmation from GoShare to $username";
 			$body = "Please click the link below to verify and activate your account.";
-			$body .= "localhost/Project1/iregistrationConfirm.php?passkey=$com_code";
+			$body .= "localhost/Project1/registrationConfirm.php?passkey=$com_code";
 			
 			$host = "GoShareUNSW@gmail.com";
 			$username = "GoShareUNSW@gmail.com";

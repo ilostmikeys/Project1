@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+		<title> Log in failed </title>
+		
+		<!-- bootstrap css file -->
+		<link href="style/bootstrap-3.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
+		
+	</head>
+	
+	<body>
+		<div class="page-header" align="center">
+		  <h1> Log in failed, try again </h1>
+		</div>
+		
+		
+		<div class="login_form" align="center">
+			<form class="form-horizontal" action="login-V2.php" method="post" >
+			
+				<div class="form-group">
+					<label for="username" class="col-sm-4 control-label"> Username: </label>
+					<div class="col-sm-5">
+						<input name="username" type="text" class="form-control" id="username" placeholder="Username"/>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="password" class="col-sm-4 control-label"> Password: </label>
+					<div class="col-sm-5">
+						<input name="password" type="password" class="form-control" id="password" placeholder="Password"/>
+					</div>
+				</div>
+
+				<div align="center">
+				<input name="submit" type="submit" value="Submit"  class="btn btn-primary btn"/>
+				</div>
+			</form>
+		</div>
+			
+		
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="js/bootstrap.min.js"></script>
+	</body>
+</html>

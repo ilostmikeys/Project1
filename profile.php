@@ -1,34 +1,9 @@
-<?php 
-
-session_start();
-		
-// Include database connection details
-include('toDatabase.php');
-
-?>
 <!DOCTYPE html>
 <html>
 
 <head>
 	
-	<?php
 	
-		$input = $_GET['user'];
-	
-		// Execute the query (the recordset $rs contains the result)
-	
-		$sqlScript = "SELECT * FROM user WHERE user = '$usernam'";
-		$rs = mysqli_query($mysqli,$sqlScript) or die(mysqli_error());
-	
-		// puts the course info into the $rs array 
-		$info = mysqli_fetch_array($rs);
-	
-		$studentId = $info['id'];
-		$fullName = $info['fullname'];
-		$userName = $info['username'];
-		$address = $info['email'];
-	
-	?>
 	<!-- bootstrap css file -->
 	<link href="style/bootstrap-3.1.1-dist/css/bootstrap.min.css" rel="stylesheet">
 	
@@ -61,6 +36,42 @@ include('toDatabase.php');
 		
 	</head>
 	<body class="margin">
+		
+		<?php
+		
+			include('toDatabase.php');
+			session_start();
+		 	if($_SESSION['user_name'] == '' ) {
+		  		header("Location: login-V2.php");
+		  		exit;
+		 	}
+		
+		 #	echo "Hi ".$_SESSION['user_name'];
+
+#			$input = $_GET['user'];
+
+	#		$studentId = $_SESSION['mem_id'];
+	#		$fullName = $_SESSION['fullname'];
+			$userName = $_SESSION['user_name'];
+	#		$address = $_SESSION['sEmail'];
+		#	echo $userName;
+
+			// Execute the query (the recordset $rs contains the result)
+
+			$sqlScript = "SELECT * FROM user WHERE username = '$userName'";
+			$rs = mysqli_query($mysqli,$sqlScript) or die(mysqli_error());
+			
+			// puts the course info into the $rs array 
+		#	$info = mysqli_fetch_array($rs);
+			if ($rs) { 
+#				echo $username;
+			}
+			
+
+		?>
+		
+		
+		
 		<nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
 	 	 
 		  <div class="container-fluid">
@@ -86,7 +97,7 @@ include('toDatabase.php');
 	<td><div align="right"><a href="index.php">logout</a></div></td>
   </tr>
   <tr>
-    <td width="129" rowspan="5"><img src="<?php echo $picture;?>" width="129" height="129" alt="no image found"/></td>
+    
     <td width="82" valign="top"><div align="left">Student Id:</div></td>
     <td width="165" valign="top"><?php echo $studentId;?></td>
   </tr>
