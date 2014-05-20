@@ -1,6 +1,6 @@
 <?php 
 	// these are the allowed extensions for files
-	$allowedExts = array("gif", "jpeg", "jpg", "png");
+	$allowedExts = array("gif", "jpeg", "jpg", "png", "pdf");
 	$temp = explode(".", $_FILES["file"]["name"]);
 	$extension = end($temp);
 	if ((($_FILES["file"]["type"] == "image/gif") 
@@ -8,7 +8,8 @@
 		|| ($_FILES["file"]["type"] == "image/jpg")
 		|| ($_FILES["file"]["type"] == "image/pjpeg")
 		|| ($_FILES["file"]["type"] == "image/x-png")
-		|| ($_FILES["file"]["type"] == "image/png"))
+		|| ($_FILES["file"]["type"] == "image/png")
+		|| ($_FILES["file"]["type"] == "image/pdf"))
 			&& ($_FILES["file"]["size"] < 2000000)
 			&& in_array($extension, $allowedExts)) {
 				if ($_FILES["file"]["error"] > 0) {
@@ -23,7 +24,7 @@
 	      				echo $_FILES["file"]["name"] . " already exists. ";
 	      			} else {
 	      				move_uploaded_file($_FILES["file"]["tmp_name"],
-	      					"upload/" . $_FILES["file"]["name"]);
+	      					"/upload" . $_FILES["file"]["name"]);
 	      				echo "Stored in: " . "upload/" . $_FILES["file"]["name"];
 	      			}
 	    		}
